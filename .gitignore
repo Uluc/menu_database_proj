@@ -3,6 +3,9 @@
 # vscode
 .vscode/
 
+# staticfiles
+staticfiles/
+
 # python
 *.cpython-38*
 *.pyc
