@@ -62,4 +62,6 @@ class Address(models.Model):
     county = models.CharField(max_length=50, default="East Baton Rouge")
     street_address = models.CharField(max_length=50)
     zipcode = models.DecimalField(max_digits=5, decimal_places=0, default=0)
-    
+
+    def streetAddress(self):
+        return self.street_address + ", " + self.city
