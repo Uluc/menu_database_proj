@@ -1,165 +1,30 @@
-<head>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
-  <style>
+{% extends 'menu_mania/base.html' %}
+{% load humanize %}
 
-    * {
-      box-sizing: border-box;
-    }
+{% block content%}
+<style>
+  .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    width: 100%;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 17px;
+  }
 
-    .row {
-      display: -ms-flexbox;
-      display: flex;
-      -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-      margin: 0 -16px;
-    }
-
-    .col-25 {
-      -ms-flex: 25%;
-      flex: 25%;
-    }
-
-    .col-50 {
-      -ms-flex: 50%;
-      flex: 50%;
-    }
-
-    .col-75 {
-      -ms-flex: 75%;
-      flex: 75%;
-    }
-
-    .col-25,
-    .col-50,
-    .col-75 {
-      padding: 0 16px;
-    }
-
-    .container {
-      background-color: #f2f2f2;
-      padding: 5px 20px 15px 20px;
-      border: 1px solid lightgrey;
-      border-radius: 3px;
-    }
-
-    input[type=text] {
-      width: 100%;
-      margin-bottom: 20px;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-    }
-
-    label {
-      margin-bottom: 10px;
-      display: block;
-    }
-
-    .icon-container {
-      margin-bottom: 20px;
-      padding: 7px 0;
-      font-size: 24px;
-    }
-
-    .btn {
-      background-color: #4CAF50;
-      color: white;
-      padding: 12px;
-      margin: 10px 0;
-      border: none;
-      width: 100%;
-      border-radius: 3px;
-      cursor: pointer;
-      font-size: 17px;
-    }
-
-    .btn:hover {
-      background-color: #45a049;
-    }
-
-    a {
-      color: #2196F3;
-    }
-
-    hr {
-      border: 1px solid lightgrey;
-    }
-
-    h2{
-      margin-bottom: 5rem;
-    }
-
-    span.price {
-      float: right;
-      color: grey;
-    }
-
-    .navbar {
-        margin-bottom: 50px;
-        border-radius: 0;
-        }
-        
-        /* Remove the jumbotron's default bottom margin */ 
-        .jumbotron {
-        margin-bottom: 0;
-        }
-
-    @media (max-width: 800px) {
-      .row {
-        flex-direction: column-reverse;
-      }
-      .col-25 {
-        margin-bottom: 20px;
-      }
-    }
-  </style>
-
-</head>
-
-<body>
-
-  <div class="jumbotron">
-    <div class="text-center">
-        <h1>Menu Mania</h1>      
-        <p>All Restaurant's and Their Menus</p>
-    </div>
-  </div>
-
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>                        
-        </button>
-        <a class="navbar-brand" href="#">Logo</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Discover</a></li>
-            <li><a href="#">Order Now</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-        </ul>
-        </div>
-    </div>
-    </nav>
-  
+  .btn:hover {
+    background-color: #45a049;
+  }
+</style>
   <h2 class="text-center">Place Order</h2>
   
   <div class="row">
     <div class="col-75">
-      <div class="container">
+      <div class="ordercontainer">
         <form action="/action_page.php">
 
           <div class="row">
@@ -178,7 +43,6 @@
                 <div class="col-50">
                   <label for="state">State</label>
                   <input type="text" id="state" name="state" required="required" data-error="State is Required">
-                  
                 </div>
                 <div class="col-50">
                   <label for="zip">Zip</label>
@@ -221,7 +85,4 @@
       </div>
     </div>
 
-    
-
-  </div>
-</body>
+{% endblock %}
