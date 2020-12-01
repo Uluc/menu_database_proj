@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django_mysql',
+    'django_extensions',
+
 
     # local apps
     'menu_mania',

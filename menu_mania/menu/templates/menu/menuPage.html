@@ -1,5 +1,6 @@
 {% extends 'menu_mania/base.html' %}
 {% load humanize %}
+{% load static %}
 
 {% block content%}
     <style>
@@ -17,7 +18,7 @@
 
     <div class="container"> 
 	{% for section in sections%}
-		<h1 class="text-center" style="margin-bottom: 4rem;" id='{{section.dishes}}'>{{section.title}}</h1>
+		<h1 class="text-center" style="margin-bottom: 4rem;">{{section.title}}</h1>
 
 		{% for dish in section.dishes%}
 		<div class="menu-item">
@@ -33,7 +34,7 @@
 				</h5>
 				<h6>${{dish.price}}</h6>
 			</div>
-			<div class="btn btn-primary text-center" style="vertical-align:middle"> Add to Cart</div>
+			<div id="addItem" class="btn btn-primary text-center" style="vertical-align:middle" onClick="addToCart('{{section.title}}','{{dish.name}}','{{dish.price}}', '{{dish.id}}')"> Add to Cart</div>
 		</div>
 		{% endfor %}
 		<hr>
@@ -43,4 +44,8 @@
 
     <br>
 
+{% endblock %}
+
+{% block extra_scripts %}
+<!-- <script src='{% static "js/menu.js" %}?version=1'></script> -->
 {% endblock %}

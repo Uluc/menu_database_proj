@@ -2,7 +2,7 @@ from django.db import models
 from django.forms.models import model_to_dict
 
 
-class Order(models.Model):
+class Cart(models.Model):
     restaurant = models.ForeignKey(
         "restaurant.Restaurant",
         on_delete=models.CASCADE
@@ -26,11 +26,11 @@ class Order(models.Model):
         # tax
         cost *= 1.1
         self.cost = cost
-        super(Order, self).save(*args, **kwargs)
+        super(Cart, self).save(*args, **kwargs)
 
 
 class Purchase(models.Model):
-    order = models.ForeignKey('order.Order', on_delete=models.CASCADE)
+    cart = models.ForeignKey('order.Cart', on_delete=models.CASCADE)
     dish = models.ForeignKey('menu.Dish', on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
 

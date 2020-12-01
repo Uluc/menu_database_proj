@@ -1,26 +1,18 @@
-# import os, sys
-# dir_path = str(os.path.dirname(os.path.realpath(__file__)))
-# dir_path = dir_path[:-16]
-# sys.path.insert(0, dir_path)
-# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'menu_mania.settings')
-# import django
-# django.setup()
 
 from address.models import Address
 from customer.models import Customer
 from menu.models import Menu, Section, Dish
-from order.models import Order, Purchase
-from restaurant.models import Restaurant
-
-
-def run(*args):
+from order.models import Cart, Purchase
+from ..models import Restaurant
+# from ...restaurant.models import Restaurant
+def run():
 
     Address.objects.all().delete()
     Customer.objects.all().delete()
     Menu.objects.all().delete()
     Section.objects.all().delete()
     Dish.objects.all().delete()
-    Order.objects.all().delete()
+    Cart.objects.all().delete()
     Purchase.objects.all().delete()
     Restaurant.objects.all().delete()
     
@@ -57,12 +49,15 @@ def run(*args):
     }, {
         'street_address': '6934 Willard Street',
         'zipcode': 54587
+    },{
+        'street_address': '60 Pine Street',
+        'zipcode': 54082
     }]
 
     for address in address_list:
         address = Address(state='LA',
-                        street_address=address.street_address,
-                        zipcode=address.zipcode
+                        street_address=address['street_address'],
+                        zipcode=address['zipcode']
                         )
         address.save()
 
@@ -92,6 +87,30 @@ def run(*args):
             'open_time': '10:30',
             'close_time': '21:00'
         },
+        {
+            'name': 'McDonald\'s',
+            'genre': 'American',
+            'price_range': '$',
+            'rating': 1.2,
+            'open_time': '0:00',
+            'close_time': '0:00'
+        },
+        {
+            'name': 'James',
+            'genre': 'Italian',
+            'price_range': '$$',
+            'rating': 4.2,
+            'open_time': '10:00',
+            'close_time': '18:00'
+        },
+        {
+            'name': 'Denny\'s',
+            'genre': 'American',
+            'price_range': '$',
+            'rating': 3.5,
+            'open_time': '7:00',
+            'close_time': '21:00'
+        },
     ]
     customer_list = [
         {
@@ -106,6 +125,18 @@ def run(*args):
             'first_name': 'Jorie',
             'last_name': 'Noll',
         },
+        {
+            'first_name': 'Matt',
+            'last_name': 'Wilcox',
+        },
+        {
+            'first_name': 'Andrew',
+            'last_name': 'Hannie',
+        },
+        {
+            'first_name': 'Bryce',
+            'last_name': 'Lee',
+        },
     ]
 
     addresses = Address.objects.all()
@@ -113,19 +144,19 @@ def run(*args):
     y = 0
     for address in addresses:
         if x%2 == 0:
-            customer = Customer(first_name=customer_list[y].first_name,
-                                last_name=customer_list[y].last_name,
+            customer = Customer(first_name=customer_list[y]['first_name'],
+                                last_name=customer_list[y]['last_name'],
                                 address=address
                                 )
             customer.save()
             y+=1
         else:
-            restaurant = Restaurant(name=restaurant_list[y].name,
-                                    genre=restaurant_list[y].genre,
-                                    price_range=restaurant_list[y].price_range,
-                                    rating=restaurant_list[y].rating,
-                                    open_time=restaurant_list[y].open_time,
-                                    close_time=restaurant_list[y].close_time,
+            restaurant = Restaurant(name=restaurant_list[y]['name'],
+                                    food_genre=restaurant_list[y]['genre'],
+                                    price_range=restaurant_list[y]['price_range'],
+                                    rating=restaurant_list[y]['rating'],
+                                    open_time=restaurant_list[y]['open_time'],
+                                    close_time=restaurant_list[y]['close_time'],
                                     address=address
                                     )
             restaurant.save()
@@ -146,10 +177,56 @@ def run(*args):
             'description': 'A hot dog with ketchup and mustard',
             'price': 5,
             'ingredients': ['hot dog', 'mustard', 'ketchup', 'bun'],
-
+        },
+        {
+            'name': 'hamburger',
+            'description': 'A piece of ground beef between two buns',
+            'price': 5,
+            'ingredients': ['ground beef', 'lettuce', 'tomato', 'pickles', 'mustard', 'ketchup', 'bun'],
+        },
+        {
+            'name': 'BLT',
+            'description': 'A sandwich made out of bacon lettuce and tomato',
+            'price': 5,
+            'ingredients': ['bread', 'bacon', 'lettuce', 'tomato'],
+        },
+        {
+            'name': 'grilled chicken',
+            'description': 'chicken that is grilled',
+            'price': 5,
+            'ingredients': ['chicken'],
+        },
+        {
+            'name': 'red beans and rice',
+            'description': 'a southern classic',
+            'price': 5,
+            'ingredients': ['red beans', 'rice'],  
+        },
+        {
+            'name': 'beef wellington',
+            'description': 'filet mignon wrapped in a puff pastry',
+            'price': 5,
+            'ingredients': ['filet mignon', 'pastry'],
+        },
+        {
+            'name': 'krabby patty',
+            'description': 'spongebobs favorite',
+            'price': 5,
+            'ingredients': ['ground beef', 'mustard', 'ketchup', 'bun'],
+        },
+        {
+            'name': 'steak',
+            'description': 'a nice piece of beef that is cooked to your liking',
+            'price': 5,
+            'ingredients': ['steak'],
+        },
+        {
+            'name': 'crawfish',
+            'description': 'boiled crawfish',
+            'price': 5,
+            'ingredients': ['water', 'crawfish', 'spices'],
         }
     ]
-
     # make a list of lunch objects
     lunch_dishes = [
         {
@@ -158,7 +235,25 @@ def run(*args):
             'price': 5,
             'ingredients': ['hot dog', 'mustard', 'ketchup', 'bun'],
 
-        }
+        },
+        {
+            'name': 'hamburger',
+            'description': 'A piece of ground beef between two buns',
+            'price': 5,
+            'ingredients': ['ground beef', 'lettuce', 'tomato', 'pickles', 'mustard', 'ketchup', 'bun'],
+        },
+        {
+            'name': 'red beans and rice',
+            'description': 'a southern classic',
+            'price': 5,
+            'ingredients': ['red beans', 'rice'],  
+        },
+        {
+            'name': 'steak',
+            'description': 'a nice piece of beef that is cooked to your liking',
+            'price': 5,
+            'ingredients': ['steak'],
+        },
     ]
 
 
@@ -234,6 +329,12 @@ def run(*args):
             'description': 'Classic style veggie Spring Roll',
             'price': 8.95,
             'ingredients': ['carrots', 'rice wrap', 'cabbage', 'onion', 'soy sauce']
+        },
+        {
+            'name':'Quesadilla',
+            'description': 'Classic cheese quesadilla',
+            'price': 4.95,
+            'ingredients': ['tortilla', 'cheese']
         }
     ]
 
@@ -244,44 +345,91 @@ def run(*args):
             'description': 'vanilla ice cream with chocolate sauce and a cherry',
             'price': 4.95,
             'ingredients': ['ice cream', 'chocolate sauce', 'cherry']
+        },
+        {
+            'name':'cheesecake',
+            'description': 'Classic New York cheesecake',
+            'price': 4.95,
+            'ingredients': ['cheesecake', 'gramcracker']
         }
     ]
 
     for menu in menus:
         for section in section_list:
-            section = Section(title=section)
+            section = Section(title=section, menu=menu)
             section.save()
-            for dish in dinner_dishes:
-                dish = Dish(name=dish.name,
-                            description=dish.description,
-                            price=dish.price,
-                            ingredient=dish.ingredients
-                            )
-                dish.save()
-            for dish in lunch_dishes:
-                dish = Dish(name=dish.name,
-                            description=dish.description,
-                            price=dish.price,
-                            ingredient=dish.ingredients)
-                dish.save()
-            for dish in drink_list:
-                dish = Dish(name=dish.name,
-                            description=dish.description,
-                            price=dish.price,
-                            ingredient=dish.ingredients
-                            )
-                dish.save()
-            for dish in app_list:
-                dish = Dish(name=dish.name,
-                            description=dish.description,
-                            price=dish.price,
-                            ingredient=dish.ingredients
-                            )
-                dish.save()
-            for dish in dessert_list:
-                dish = Dish(name=dish.name,
-                            description=dish.description,
-                            price=dish.price,
-                            ingredient=dish.ingredients
-                            )
-                dish.save()
+            if section.title in 'drinks':
+                for dish in drink_list:
+                    if not Dish.objects.filter(name=dish['name'],description=dish['description'],price=dish['price'],ingredients=dish['ingredients']).exists():
+                        dish = Dish(name=dish['name'],
+                                    description=dish['description'],
+                                    price=dish['price'],
+                                    ingredients=dish['ingredients']
+                                    )
+                        dish.save()
+                        dish.section.add(section)
+                        dish.save()
+                    else:
+                        dish = Dish.objects.get(name=dish['name'],description=dish['description'],price=dish['price'],ingredients=dish['ingredients'])
+                        dish.section.add(section)
+                        dish.save()
+            elif section.title in 'dinner':
+                for dish in dinner_dishes:
+                    if not Dish.objects.filter(name=dish['name'],description=dish['description'],price=dish['price'],ingredients=dish['ingredients']).exists():
+                        dish = Dish(name=dish['name'],
+                                    description=dish['description'],
+                                    price=dish['price'],
+                                    ingredients=dish['ingredients']
+                                    )
+                        dish.save()
+                        dish.section.add(section)
+                        dish.save()
+                    else:
+                        dish = Dish.objects.get(name=dish['name'],description=dish['description'],price=dish['price'],ingredients=dish['ingredients'])
+                        dish.section.add(section)
+                        dish.save()
+            elif section.title in 'lunch':
+                for dish in lunch_dishes:
+                    if not Dish.objects.filter(name=dish['name'],description=dish['description'],price=dish['price'],ingredients=dish['ingredients']).exists():
+                        dish = Dish(name=dish['name'],
+                                    description=dish['description'],
+                                    price=dish['price'],
+                                    ingredients=dish['ingredients']
+                                    )
+                        dish.save()
+                        dish.section.add(section)
+                        dish.save()
+                    else:
+                        dish = Dish.objects.get(name=dish['name'],description=dish['description'],price=dish['price'],ingredients=dish['ingredients'])
+                        dish.section.add(section)
+                        dish.save()
+            elif section.title in 'appetizer':
+                for dish in app_list:
+                    if not Dish.objects.filter(name=dish['name'],description=dish['description'],price=dish['price'],ingredients=dish['ingredients']).exists():
+                        dish = Dish(name=dish['name'],
+                                    description=dish['description'],
+                                    price=dish['price'],
+                                    ingredients=dish['ingredients']
+                                    )
+                        dish.save()
+                        dish.section.add(section)
+                        dish.save()
+                    else:
+                        dish = Dish.objects.get(name=dish['name'],description=dish['description'],price=dish['price'],ingredients=dish['ingredients'])
+                        dish.section.add(section)
+                        dish.save()
+            else:
+                for dish in dessert_list:
+                    if not Dish.objects.filter(name=dish['name'],description=dish['description'],price=dish['price'],ingredients=dish['ingredients']).exists():
+                        dish = Dish(name=dish['name'],
+                                    description=dish['description'],
+                                    price=dish['price'],
+                                    ingredients=dish['ingredients']
+                                    )
+                        dish.save()
+                        dish.section.add(section)
+                        dish.save()
+                    else:
+                        dish = Dish.objects.get(name=dish['name'],description=dish['description'],price=dish['price'],ingredients=dish['ingredients'])
+                        dish.section.add(section)
+                        dish.save()

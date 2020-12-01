@@ -12,7 +12,7 @@ def menu(request, slug):
     for section in sections:
         section_dict = model_to_dict(section)
         dishes_list = []
-        dishes = Dish.objects.filter(section=section)
+        dishes = section.dish_set.all()
         for dish in dishes:
             dish = model_to_dict(dish)
             dishes_list.append(dish)
