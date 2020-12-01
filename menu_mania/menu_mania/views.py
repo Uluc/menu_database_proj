@@ -1,11 +1,6 @@
 from django.shortcuts import render
-from django.views.decorators.cache import never_cache
-from django.http import HttpResponse
 from restaurant.models import Restaurant
 from django.forms.models import model_to_dict
-from django.core.serializers.json import DjangoJSONEncoder
-import json
-
 
 def home(request):
     restaurants_objs = Restaurant.objects.all()

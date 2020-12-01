@@ -22,6 +22,3 @@ class Dish(models.Model):
     ingredients = ListCharField(base_field=models.CharField(max_length=15),
                                 size=15,
                                 max_length=(15 * 16))
-    allergens = ListCharField(base_field=models.CharField(max_length=12),
-                              size=10,
-                              max_length=(10 * 13))

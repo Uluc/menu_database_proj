@@ -12,47 +12,34 @@
 			align-self: center;
         }
     </style>
-	<h1 class="heading-restaurant text-center"> Uluc's Restaurant Menu</h1>  
+	<h1 class="heading-restaurant text-center"> {{restaurant.name}} Menu</h1>  
+
 
     <div class="container"> 
-		<h1 class="text-center" style="margin-bottom: 4rem;">Appetizers</h1>
+	{% for section in sections%}
+		<h1 class="text-center" style="margin-bottom: 4rem;" id='{{section.dishes}}'>{{section.title}}</h1>
+
+		{% for dish in section.dishes%}
 		<div class="menu-item">
 			<div>
-				<h4>Lemon-Rosemary Seafood</h4>
-				<h5>Seafood / Rosemary / Lemon</h5>
-				<h6>$22.99</h6>
+				<h4>{{dish.name}}</h4>
+				<h5>
+					{% for ingredient in dish.ingredients %}
+						{{ingredient}}
+						{% if forloop.counter != dish.ingredients|length %}
+							/
+						{% endif %}
+					{% endfor %}
+				</h5>
+				<h6>${{dish.price}}</h6>
 			</div>
 			<div class="btn btn-primary text-center" style="vertical-align:middle"> Add to Cart</div>
 		</div>
-		<div class="menu-item">
-			<div>
-				<h4>Lemon-Rosemary Seafood</h4>
-				<h5>Seafood / Rosemary / Lemon</h5>
-				<h6>$22.99</h6>
-			</div>
-			<div class="btn btn-primary text-center" style="vertical-align:middle"> Add to Cart</div>
-		</div>
+		{% endfor %}
 		<hr>
-		<h1 class="text-center" style="margin-bottom: 4rem;">Lunch</h1>
-		<div class="menu-item">
-			<div>
-				<h4>Lemon-Rosemary Seafood</h4>
-				<h5>Seafood / Rosemary / Lemon</h5>
-				<h6>$22.99</h6>
-			</div>
-			<div class="btn btn-primary text-center" style="vertical-align:middle"> Add to Cart</div>
-		</div>
-		<div class="menu-item">
-			<div>
-				<h4>Lemon-Rosemary Seafood</h4>
-				<h5>Seafood / Rosemary / Lemon</h5>
-				<h6>$22.99</h6>
-			</div>
-			<div class="btn btn-primary text-center" style="vertical-align:middle"> Add to Cart</div>
-		</div>
-		<hr>
+	{% endfor %}
+
 	</div>
-    </div>
 
     <br>
 
