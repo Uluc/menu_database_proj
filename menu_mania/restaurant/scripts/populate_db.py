@@ -175,55 +175,55 @@ def run():
         {
             'name': 'hot dog',
             'description': 'A hot dog with ketchup and mustard',
-            'price': 5,
+            'price': 5.95,
             'ingredients': ['hot dog', 'mustard', 'ketchup', 'bun'],
         },
         {
             'name': 'hamburger',
             'description': 'A piece of ground beef between two buns',
-            'price': 5,
+            'price': 5.95,
             'ingredients': ['ground beef', 'lettuce', 'tomato', 'pickles', 'mustard', 'ketchup', 'bun'],
         },
         {
             'name': 'BLT',
             'description': 'A sandwich made out of bacon lettuce and tomato',
-            'price': 5,
+            'price': 6.95,
             'ingredients': ['bread', 'bacon', 'lettuce', 'tomato'],
         },
         {
             'name': 'grilled chicken',
             'description': 'chicken that is grilled',
-            'price': 5,
+            'price': 9.99,
             'ingredients': ['chicken'],
         },
         {
             'name': 'red beans and rice',
             'description': 'a southern classic',
-            'price': 5,
+            'price': 10.99,
             'ingredients': ['red beans', 'rice'],  
         },
         {
             'name': 'beef wellington',
             'description': 'filet mignon wrapped in a puff pastry',
-            'price': 5,
+            'price': 13.95,
             'ingredients': ['filet mignon', 'pastry'],
         },
         {
             'name': 'krabby patty',
             'description': 'spongebobs favorite',
-            'price': 5,
+            'price': 8.95,
             'ingredients': ['ground beef', 'mustard', 'ketchup', 'bun'],
         },
         {
             'name': 'steak',
             'description': 'a nice piece of beef that is cooked to your liking',
-            'price': 5,
+            'price': 16.50,
             'ingredients': ['steak'],
         },
         {
             'name': 'crawfish',
             'description': 'boiled crawfish',
-            'price': 5,
+            'price': 11.95,
             'ingredients': ['water', 'crawfish', 'spices'],
         }
     ]
@@ -232,26 +232,26 @@ def run():
         {
             'name': 'hot dog',
             'description': 'A hot dog with ketchup and mustard',
-            'price': 5,
+            'price': 5.95,
             'ingredients': ['hot dog', 'mustard', 'ketchup', 'bun'],
 
         },
         {
             'name': 'hamburger',
             'description': 'A piece of ground beef between two buns',
-            'price': 5,
+            'price': 5.95,
             'ingredients': ['ground beef', 'lettuce', 'tomato', 'pickles', 'mustard', 'ketchup', 'bun'],
         },
         {
             'name': 'red beans and rice',
             'description': 'a southern classic',
-            'price': 5,
+            'price': 10.99,
             'ingredients': ['red beans', 'rice'],  
         },
         {
             'name': 'steak',
             'description': 'a nice piece of beef that is cooked to your liking',
-            'price': 5,
+            'price': 16.50,
             'ingredients': ['steak'],
         },
     ]
@@ -349,7 +349,7 @@ def run():
         {
             'name':'cheesecake',
             'description': 'Classic New York cheesecake',
-            'price': 4.95,
+            'price': 6.95,
             'ingredients': ['cheesecake', 'gramcracker']
         }
     ]
@@ -403,7 +403,7 @@ def run():
                         dish = Dish.objects.get(name=dish['name'],description=dish['description'],price=dish['price'],ingredients=dish['ingredients'])
                         dish.section.add(section)
                         dish.save()
-            elif section.title in 'appetizer':
+            elif section.title in 'appetizers':
                 for dish in app_list:
                     if not Dish.objects.filter(name=dish['name'],description=dish['description'],price=dish['price'],ingredients=dish['ingredients']).exists():
                         dish = Dish(name=dish['name'],

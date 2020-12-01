@@ -40,9 +40,11 @@ function cartCosts(){
     for (var i = 0; i < cart.length; i++) {
         sum+= Number(cart[i].totalPrice);
     }
-    console.log(sum);
-    $('#subTotal').html('$' + sum);
-    $('#tax').html('$' + sum*.1);
+    tax = sum * .1
+    console.log(sum)
+    console.log(tax);
+    $('#subTotal').html('$' + sum.toFixed(2));
+    $('#tax').html('$' + tax.toFixed(2));
 
 }
 
@@ -51,10 +53,8 @@ function changeServing(id){
     for(var i = 0; i< cart.length; i++){
         if(cart[i].id == id){
             obj = cart[i];
-            console.log(obj)
             obj.servings = document.getElementById(`serving${obj.id}`).value;
             obj.totalPrice = obj.price * obj.servings;
-            console.log(obj)
             $(`#total${obj.id}`).html('$'+obj.totalPrice)
             break;
         }
