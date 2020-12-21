@@ -1,0 +1,90 @@
+{% extends 'menu_mania/base.html' %}
+{% load humanize %}
+
+{% block content%}
+
+    <h1 class= "text-center">Cart</h1>
+    <hr>
+
+    <div class="order-table">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>Dish</th>
+                <th>Cost</th>
+                <th>Servings</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+                <td>Dish 1</td>
+                <td>19.99</td>
+                <td>
+                    <select name="servings" id="servings" class="servings">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </td>
+                <td>39.98</td>
+                <td style = "width: 1rem;">
+                    <div class="btn btn-warning" onclick="return this.parentNode.parentNode.remove();"> Remove</div>
+                </td>
+            </tr>
+            <tr>
+                <td>Dish 2</td>
+                <td>19.99</td>
+                <td>
+                    <select name="servings" id="servings" class="servings">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </td>
+                <td>39.98</td>
+                <td style = "width: 1rem;">
+                    <div class="btn btn-warning" onclick="return this.parentNode.parentNode.remove();"> Remove</div>
+                </td>
+            </tr>
+            <tr>
+                <td>Dish 3</td>
+                <td>19.99</td>
+                <td>
+                    <select name="servings" id="servings" class="servings">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </td>
+                <td>39.98</td>
+                <td style = "width: 1rem;">
+                    <div class="btn btn-warning" onclick="return this.parentNode.parentNode.remove();"> Remove</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>Order Summary</h3>
+        <hr>
+        <div class="totals">
+            <h4>SubTotal:</h4>
+            <h4>$14.99</h4>
+        </div>
+        <div class="totals">
+            <h4>Tax:</h4>
+            <h4>$1.49</h4>
+        </div>
+        <div class="totals">
+            <h4>Tip:</h4>
+            <input class="form-control form-control-lg" type="text" placeholder="20%">
+        </div>
+
+    </div>
+
+    <a href={% url "order" %}><div class="btn btn-primary">Checkout</div></a>
+{% endblock %}

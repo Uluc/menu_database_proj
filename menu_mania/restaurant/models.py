@@ -13,10 +13,6 @@ class Restaurant(models.Model):
 
     price_range = models.CharField(max_length=4, choices=PriceRange.choices)
     rating = models.DecimalField(max_digits=2, decimal_places=1)
-    address = models.ForeignKey(
-        "address.Address",
-        on_delete=models.SET_NULL,
-        null=True
-    )
+    address = models.ForeignKey("address.Address", on_delete=models.CASCADE)
     open_time = models.TimeField()
     close_time = models.TimeField()

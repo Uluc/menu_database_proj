@@ -3,8 +3,7 @@ from django_mysql.models.fields import ListCharField
 
 
 class Menu(models.Model):
-    restaurant = models.ForeignKey("restaurant.Restaurant",
-                                   on_delete=models.CASCADE)
+    restaurant = models.ForeignKey("restaurant.Restaurant", on_delete=models.CASCADE)
     bio = models.TextField()
 
 
@@ -17,12 +16,10 @@ class Section(models.Model):
 
 class Dish(models.Model):
     name = models.CharField(max_length=50)
-    section = models.ForeignKey("menu.Section", on_delete=models.CASCADE)
+    section = models.ManyToManyField("menu.Section")
     description = models.TextField()
     price = models.DecimalField(max_digits=5, decimal_places=2)
     ingredients = ListCharField(base_field=models.CharField(max_length=15),
                                 size=15,
-                                max_length=(15 * 16))
-    allergens = ListCharField(base_field=models.CharField(max_length=12),
-                              size=10,
-                              max_length=(10 * 13))
+                                max_length=(15 * 16)
+                                )
